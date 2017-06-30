@@ -27,7 +27,7 @@
   "homepage": "https://github.com/maraisr/pocketsmith#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "got": "^6.3.0"
+    "got": "^7.1.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.4",
