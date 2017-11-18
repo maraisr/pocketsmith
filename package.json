@@ -1,6 +1,6 @@
 {
   "name": "pocketsmith",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "PocketSmith api wrapper for Node.",
   "main": "dist/index.js",
   "scripts": {
