@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.18",
-    "@types/node": "^8.0.53",
+    "@types/node": "^9.3.0",
     "chai": "^4.1.2",
     "codecov": "^3.0.0",
     "got": "^8.0.0",
