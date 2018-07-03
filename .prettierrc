@@ -1,0 +1,14 @@
+printWidth: 80
+bracketSpacing: true
+semi: true
+singleQuote: true
+tabWidth: 4
+trailingComma: none
+useTabs: true
+
+overrides:
+  - files: "package.json"
+    options:
+       printWidth: 999
+       tabWidth: 2
+       useTabs: false
