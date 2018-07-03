@@ -1,15 +1,12 @@
-import * as Promise from 'bluebird';
-import {PocketSmithInterface, MeInterface} from '../interfaces';
+import { PocketSmithInterface, MeInterface } from '../interfaces';
 
 export default class Me {
 	public data: MeInterface;
 
-	constructor(private context: PocketSmithInterface) {
-
-	}
+	constructor(private context: PocketSmithInterface) {}
 
 	init(): Promise<any> {
-		return new Promise((resolve) => {
+		return new Promise(resolve => {
 			this.context.Client.get('me').then((res: MeInterface) => {
 				this.data = res;
 				resolve(this);

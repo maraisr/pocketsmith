@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var expect = require('chai').expect,
 	nock = require('nock');
@@ -9,21 +9,19 @@ var API = 'https://api.pocketsmith.com/v2';
 
 describe('Transactions', function() {
 	before(function() {
-		this.smith = (new PocketSmith('TOKEN'));
+		this.smith = new PocketSmith('TOKEN');
 		this.trans = this.smith.Transactions;
 	});
 
 	describe('instance', function() {
-		var methods = [
-			'getAll'
-		];
+		var methods = ['getAll'];
 
-		methods.forEach((method) => {
+		methods.forEach(method => {
 			it('should have a ' + method + ' method', function() {
-				expect(this.trans[method])
-					.to.exist
-					.to.be.an.instanceOf(Function);
-			})
+				expect(this.trans[method]).to.exist.to.be.an.instanceOf(
+					Function
+				);
+			});
 		});
 	});
 
@@ -33,7 +31,7 @@ describe('Transactions', function() {
 				.get('/me')
 				.reply(200, { id: 1 });
 
-			this.smith.init().then((smith) => {
+			this.smith.init().then(smith => {
 				this.inst = smith;
 				done();
 			});
@@ -49,11 +47,10 @@ describe('Transactions', function() {
 				.query({ page: 1 })
 				.reply(200);
 
-			this.trans.getAll({}, 1)
-				.then(() => {
-					expect(req.isDone()).to.be.true;
-					done();
-				});
+			this.trans.getAll({}, 1).then(() => {
+				expect(req.isDone()).to.be.true;
+				done();
+			});
 		});
 
 		it('should get `me` user transactions', function(done) {
@@ -62,11 +59,10 @@ describe('Transactions', function() {
 				.query({ page: 1 })
 				.reply(200);
 
-			this.trans.getAll({})
-				.then(() => {
-					expect(req.isDone()).to.be.true;
-					done();
-				});
+			this.trans.getAll({}).then(() => {
+				expect(req.isDone()).to.be.true;
+				done();
+			});
 		});
 
 		it('should return page 1, then page 2 with next function', function(done) {
@@ -80,16 +76,15 @@ describe('Transactions', function() {
 				.query({ page: 2 })
 				.reply(200, { page: 2 });
 
-			this.trans.getAll({})
-				.then((v) => {
-					expect(v.data.page).to.equal(1);
+			this.trans.getAll({}).then(v => {
+				expect(v.data.page).to.equal(1);
 
-					v.next((v) => {
-						expect(req.isDone()).to.be.true;
-						expect(v.data.page).to.equal(2);
-						done();
-					})
+				v.next(v => {
+					expect(req.isDone()).to.be.true;
+					expect(v.data.page).to.equal(2);
+					done();
 				});
+			});
 		});
 
 		it('should return `.next` function from callback', function(done) {
@@ -98,15 +93,12 @@ describe('Transactions', function() {
 				.query({ page: 1 })
 				.reply(200, { page: 1 });
 
-			this.trans.getAll({})
-				.then((v) => {
-					expect(v['next'])
-						.to.exist
-						.to.be.an.instanceOf(Function);
+			this.trans.getAll({}).then(v => {
+				expect(v['next']).to.exist.to.be.an.instanceOf(Function);
 
-					expect(v.data.page).to.equal(1);
-					done();
-				});
+				expect(v.data.page).to.equal(1);
+				done();
+			});
 		});
 
 		it('should reject when an error is found', function(done) {
@@ -115,11 +107,10 @@ describe('Transactions', function() {
 				.query({ page: 1 })
 				.replyWithError(500);
 
-			this.trans.getAll({})
-				.catch(v => {
-					expect(v.message).to.equal('500');
-					done();
-				});
+			this.trans.getAll({}).catch(v => {
+				expect(v.message).to.equal('500');
+				done();
+			});
 		});
 	});
 });

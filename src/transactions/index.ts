@@ -1,16 +1,18 @@
-import * as Promise from 'bluebird';
-import {PocketSmithInterface, TransQueryInterface} from '../interfaces';
+import { PocketSmithInterface, TransQueryInterface } from '../interfaces';
 
 export default class Transactions {
-	constructor(private context: PocketSmithInterface) {
+	constructor(private context: PocketSmithInterface) {}
 
-	}
-
-	getAll(query: TransQueryInterface, userId?: number, callback?: Function): Promise<any> {
+	getAll(
+		query: TransQueryInterface,
+		userId?: number,
+		callback?: Function
+	): Promise<any> {
 		let page: number = 1;
 		query.page = page;
 
-		let url: string = `users/${userId || this.context.Me.data.id}/transactions`;
+		let url: string = `users/${userId ||
+			this.context.Me.data.id}/transactions`;
 
 		let req: Promise<any> = this.context.Client.get(url, void 0, query);
 

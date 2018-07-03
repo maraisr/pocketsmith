@@ -1,8 +1,7 @@
 import * as Got from 'got';
-import * as Promise from 'bluebird';
 
 class Client {
-	constructor(private token: string) { }
+	constructor(private token: string) {}
 
 	private resource(method: string, url: string, payload?: any): Promise<any> {
 		return new Promise((resolve, reject) => {
@@ -12,15 +11,17 @@ class Client {
 				retries: 0,
 				query: payload || void 0,
 				headers: {
-					'Authorization': this.token,
+					Authorization: this.token,
 					'Content-Type': 'application/json'
 				}
-			})
-				.then(response => {
+			}).then(
+				response => {
 					resolve(response.body);
-				}, err => {
+				},
+				err => {
 					reject(err);
-				});
+				}
+			);
 		});
 	}
 
@@ -28,7 +29,7 @@ class Client {
 		let prom = this.resource('GET', url, payload);
 
 		if (!(callback === void 0)) {
-			prom.then((resp) => {
+			prom.then(resp => {
 				callback(resp);
 			});
 		}

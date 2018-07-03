@@ -1,23 +1,29 @@
-import * as Promise from 'bluebird';
-import {PocketSmithInterface, AccountInterface} from '../interfaces';
+import { PocketSmithInterface, AccountInterface } from '../interfaces';
 
-import {NotInMeContext} from '../exceptions';
+import { NotInMeContext } from '../exceptions';
 
 export default class Accounts {
-	constructor(private context: PocketSmithInterface) {
-
-	}
+	constructor(private context: PocketSmithInterface) {}
 
 	get(id: number, callback?: Function): Promise<AccountInterface> {
 		return this.context.Client.get(`accounts/${id}`, callback);
 	}
 
-	getAllByUser(userId: number, callback?: Function): Promise<Array<AccountInterface>> {
+	getAllByUser(
+		userId: number,
+		callback?: Function
+	): Promise<Array<AccountInterface>> {
 		return this.context.Client.get(`users/${userId}/accounts`, callback);
 	}
 
-	getAllByInstitution(institutionId: number, callback?: Function): Promise<Array<AccountInterface>> {
-		return this.context.Client.get(`institutions/${institutionId}/accounts`, callback);
+	getAllByInstitution(
+		institutionId: number,
+		callback?: Function
+	): Promise<Array<AccountInterface>> {
+		return this.context.Client.get(
+			`institutions/${institutionId}/accounts`,
+			callback
+		);
 	}
 
 	// -- In `me` context --

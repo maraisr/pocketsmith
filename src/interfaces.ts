@@ -32,9 +32,7 @@ export interface MeInterface {
 	updated_at: string;
 }
 
-export interface CategoryInterface {
-
-}
+export interface CategoryInterface {}
 
 export interface AccountInterface {
 	id: number;
